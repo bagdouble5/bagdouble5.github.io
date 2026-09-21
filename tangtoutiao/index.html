@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="汤头条为您提供最新鲜的汤品食谱、滋补养生汤谱、家常汤做法以及各地特色汤品推荐。从老火靓汤到快手汤品，一站式解决您的“喝什么汤”难题。">
+    <meta name="keywords" content="汤头条, 汤谱, 食谱, 养生汤, 炖汤, 家常汤, 汤的做法">
+    <title>汤头条-最新鲜汤品食谱与滋补养生指南</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #d35400; /* 砖红色，代表热汤 */
+            --primary-hover: #a04000;
+            --secondary-color: #2c3e50; /* 深蓝灰色，代表稳重 */
+            --bg-color: #fdfbf7; /* 暖米色，增加食欲感 */
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-light: #7f8c8d;
+            --border-radius: 8px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --container-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* 布局容器 */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 顶部导航 */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--secondary-color);
+            position: relative;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: #f0f0f0;
+            border-radius: 20px;
+            padding: 5px 15px;
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            padding: 5px;
+            font-size: 14px;
+            width: 200px;
+        }
+
+        .search-box button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        /* Hero 区域 */
+        .hero {
+            position: relative;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://picsum.photos/seed/souphero/1600/600') no-repeat center center/cover;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .hero-content h1 {
+            font-size: 42px;
+            margin-bottom: 16px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            margin-bottom: 24px;
+            opacity: 0.9;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 32px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .hero-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* 主要内容网格 */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        /* 左侧内容区 */
+        .section-title {
+            font-size: 24px;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            padding-left: 12px;
+            border-left: 5px solid var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title a {
+            font-size: 14px;
+            color: var(--text-light);
+            font-weight: normal;
+        }
+
+        .section-title a:hover {
+            color: var(--primary-color);
+        }
+
+        .recipe-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            display: flex;
+            transition: transform 0.2s;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .recipe-img {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .recipe-info {
+            padding: 20px;
+            flex: 1;
+        }
+
+        .recipe-tag {
+            display: inline-block;
+            background-color: #fff3e0;
+            color: var(--primary-color);
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+
+        .recipe-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .recipe-desc {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 12px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .recipe-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .recipe-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* 右侧侧边栏 */
+        .sidebar-widget {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .widget-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .rank-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .rank-num {
+            width: 20px;
+            height: 20px;
+            background: #eee;
+            color: #666;
+            text-align: center;
+            line-height: 20px;
+            font-size: 12px;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .rank-list li:nth-child(1) .rank-num { background: #ff6b6b; color: white; }
+        .rank-list li:nth-child(2) .rank-num { background: #ffa502; color: white; }
+        .rank-list li:nth-child(3) .rank-num { background: #ffdd59; color: white; }
+
+        .rank-name {
+            font-size: 14px;
+            color: var(--text-main);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex: 1;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .cat-item {
+            display: block;
+            background: #f8f9fa;
+            padding: 10px;
+            text-align: center;
+            border-radius: 6px;
+            font-size: 14px;
+            color: var(--secondary-color);
+            transition: background 0.2s;
+        }
+
+        .cat-item:hover {
+            background: #eef2f7;
+            color: var(--primary-color);
+        }
+
+        /* 专题/分类展示区 */
+        .features-section {
+            background-color: white;
+            padding: 40px 0;
+            margin-bottom: 40px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .feature-card {
+            position: relative;
+            height: 160px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .feature-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .feature-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .feature-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 20px;
+            color: white;
+        }
+
+        .feature-overlay h3 {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        /* 底部 */
+        footer {
+            background-color: var(--secondary-color);
+            color: #bdc3c7;
+            padding: 50px 0 20px;
+            font-size: 14px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* 简化处理，移动端隐藏菜单 */
+            }
+            .search-box {
+                display: none;
+            }
+            .hero {
+                height: 300px;
+            }
+            .hero-content h1 {
+                font-size: 28px;
+            }
+            .recipe-card {
+                flex-direction: column;
+            }
+            .recipe-img {
+                width: 100%;
+                height: 180px;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+                汤头条
+                <span>SoupNews</span>
+            </a>
+            <nav class="nav-links">
+                <a href="#" class="active">首页</a>
+                <a href="#">滋补养生</a>
+                <a href="#">快手汤品</a>
+                <a href="#">汤谱大全</a>
+                <a href="#">厨房技巧</a>
+                <a href="#">饮食文化</a>
+            </nav>
+            <div class="search-box">
+                <input type="text" placeholder="搜索汤谱、食材...">
+                <button>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-content">
+                <h1>今日推荐：红枣枸杞炖鸡汤</h1>
+                <p>温补气血，适合秋冬进补，简单易学，营养满分。</p>
+                <a href="#" class="hero-btn">查看详细做法</a>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- Main Content Area -->
+            <div class="main-grid">
+                <!-- Left Column: Articles -->
+                <div class="content-column">
+                    <div class="section-title">
+                        <h2>最新汤谱推荐</h2>
+                        <a href="#">查看更多 &gt;</a>
+                    </div>
+
+                    <!-- Article Card 1 -->
+                    <article class="recipe-card">
+                        <img src="https://picsum.photos/seed/soup1/400/300" alt="排骨莲藕汤" class="recipe-img">
+                        <div class="recipe-info">
+                            <span class="recipe-tag">家常汤品</span>
+                            <h3 class="recipe-title"><a href="#">粉糯莲藕排骨汤：秋冬暖身首选</a></h3>
+                            <p class="recipe-desc">莲藕选择粉藕，炖煮时间要够长，汤色才会奶白浓郁。搭配排骨，营养丰富，老少皆宜。</p>
+                            <div class="recipe-meta">
+                                <span>🕒 120分钟</span>
+                                <span>👥 4人份</span>
+                                <span>🔥 难度：中等</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Article Card 2 -->
+                    <article class="recipe-card">
+                        <img src="https://picsum.photos/seed/soup2/400/300" alt="玉米胡萝卜汤" class="recipe-img">
+                        <div class="recipe-info">
+                            <span class="recipe-tag">快手汤品</span>
+                            <h3 class="recipe-title"><a href="#">清甜玉米胡萝卜排骨汤</a></h3>
+                            <p class="recipe-desc">无需过多调料，只需清水和少许盐，利用食材本身的甜味，汤鲜味美，适合全家。</p>
+                            <div class="recipe-meta">
+                                <span>🕒 45分钟</span>
+                                <span>👥 2-3人份</span>
+                                <span>🔥 难度：简单</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Article Card 3 -->
+                    <article class="recipe-card">
+                        <img src="https://picsum.photos/seed/soup3/400/300" alt="老火靓汤" class="recipe-img">
+                        <div class="recipe-info">
+                            <span class="recipe-tag">广东靓汤</span>
+                            <h3 class="recipe-title"><a href="#">五指毛桃土茯苓汤：祛湿健脾</a></h3>
+                            <p class="recipe-desc">南方特色的祛湿汤品，五指毛桃自带椰香，搭配土茯苓，适合梅雨季节或湿气重人群。</p>
+                            <div class="recipe-meta">
+                                <span>🕒 90分钟</span>
+                                <span>👥 6人份</span>
+                                <span>🔥 难度：中等</span>
+                            </div>
+                        </div>
+                    </article>
+
+                     <!-- Article Card 4 -->
+                     <article class="recipe-card">
+                        <img src="https://picsum.photos/seed/soup4/400/300" alt="海鲜汤" class="recipe-img">
+                        <div class="recipe-info">
+                            <span class="recipe-tag">海鲜汤</span>
+                            <h3 class="recipe-title"><a href="#">奶白鲫鱼豆腐汤：汤色浓郁</a></h3>
+                            <p class="recipe-desc">鲫鱼煎至两面金黄再炖汤，是汤色变白的关键。加入豆腐，高蛋白低脂肪，老火靓汤。</p>
+                            <div class="recipe-meta">
+                                <span>🕒 60分钟</span>
+                                <span>👥 3人份</span>
+                                <span>🔥 难度：简单</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Right Column: Sidebar -->
+                <aside class="sidebar">
+                    <!-- Ranking Widget -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">本周热门汤谱</h3>
+                        <ul class="rank-list">
+                            <li>
+                                <span class="rank-num">1</span>
+                                <span class="rank-name">当归生姜羊肉汤</span>
+                            </li>
+                            <li>
+                                <span class="rank-num">2</span>
+                                <span class="rank-name">山药玉米鸡汤</span>
+                            </li>
+                            <li>
+                                <span class="rank-num">3</span>
+                                <span class="rank-name">冬瓜丸子汤</span>
+                            </li>
+                            <li>
+                                <span class="rank-num">4</span>
+                                <span class="rank-name">西洋参炖乌鸡</span>
+                            </li>
+                            <li>
+                                <span class="rank-num">5</span>
+                                <span class="rank-name">番茄牛腩汤</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Categories Widget -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title">汤品分类</h3>
+                        <div class="category-grid">
+                            <a href="#" class="cat-item">🍲 养生滋补</a>
+                            <a href="#" class="cat-item">🍖 肉类汤</a>
+                            <a href="#" class="cat-item">🐟 海鲜汤</a>
+                            <a href="#" class="cat-item">🥬 素汤</a>
+                            <a href="#" class="cat-item">🥣 粥品</a>
+                            <a href="#" class="cat-item">👶 宝宝辅食</a>
+                        </div>
+                    </div>
+
+                    <!-- Ad Placeholder -->
+                    <div class="sidebar-widget" style="background: #eee; text-align: center; padding: 40px 20px; color: #999;">
+                        <p>广告位招商</p>
+                        <p>优质食材供应商</p>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+        <!-- Features / Categories Section -->
+        <section class="features-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>热门专题</h2>
+                </div>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <img src="https://picsum.photos/seed/soup5/400/300" alt="秋冬进补">
+                        <div class="feature-overlay">
+                            <h3>秋冬进补</h3>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <img src="https://picsum.photos/seed/soup6/400/300" alt="减脂餐">
+                        <div class="feature-overlay">
+                            <h3>低脂轻食</h3>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <img src="https://picsum.photos/seed/soup7/400/300" alt="宝宝辅食">
+                        <div class="feature-overlay">
+                            <h3>宝宝辅食</h3>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <img src="https://picsum.photos/seed/soup8/400/300" alt="汤锅推荐">
+                        <div class="feature-overlay">
+                            <h3>汤锅选购</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="container" style="margin-bottom: 60px;">
+            <div class="section-title">
+                <h2>常见问题 (FAQ)</h2>
+            </div>
+            <div style="background: white; padding: 30px; border-radius: var(--border-radius); box-shadow: var(--shadow);">
+                <details style="margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+                    <summary style="cursor: pointer; font-weight: 600; color: var(--secondary-color);">炖汤时水要一次加足吗？</summary>
+                    <p style="margin-top: 10px; color: var(--text-light); font-size: 14px;">建议尽量一次加足水。如果中途必须加水，请务必加入热水，避免冷水冲冷汤温影响肉质和营养释放。</p>
+                </details>
+                <details style="margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+                    <summary style="cursor: pointer; font-weight: 600; color: var(--secondary-color);">如何让汤色变白？</summary>
+                    <p style="margin-top: 10px; color: var(--text-light); font-size: 14px;">让汤色变白的关键在于油与水的乳化作用。肉类（如鲫鱼、排骨）需要先煎至表面金黄，再倒入开水炖煮，并保持大火沸腾一段时间。</p>
+                </details>
+                <details style="margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+                    <summary style="cursor: pointer; font-weight: 600; color: var(--secondary-color);">煲汤一般需要多长时间？</summary>
+                    <p style="margin-top: 10px; color: var(--text-light); font-size: 14px;">一般肉类汤品需要炖煮 1-2 小时，滋补类老火汤（如广东靓汤）建议 3 小时以上，以充分析出营养。</p>
+                </details>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: 20px; color: white;">
+                        汤头条
+                    </div>
+                    <p style="opacity: 0.8;">汤头条致力于分享最实用、最健康的汤谱制作方法。无论您是想为家人准备一顿温暖的晚餐，还是寻找养生调理的方案，这里都有您需要的答案。</p>
+                </div>
+                <div class="footer-col">
+                    <h4>快速导航</h4>
+                    <ul>
+                        <li><a href="#">汤谱大全</a></li>
+                        <li><a href="#">热门推荐</a></li>
+                        <li><a href="#">食材百科</a></li>
+                        <li><a href="#">厨房技巧</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>分类浏览</h4>
+                    <ul>
+                        <li><a href="#">滋补养生</a></li>
+                        <li><a href="#">家常快手</a></li>
+                        <li><a href="#">海鲜水产</a></li>
+                        <li><a href="#">素食主义</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>联系我们</h4>
+                    <ul>
+                        <li>合作建议</li>
+                        <li>版权声明</li>
+                        <li>用户协议</li>
+                        <li>意见反馈</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 汤头条 版权所有. 仅供演示，非真实网站。</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+                              </html>
